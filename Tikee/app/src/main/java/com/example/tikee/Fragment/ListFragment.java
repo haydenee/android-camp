@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,10 +73,27 @@ public class ListFragment extends Fragment {
         mAdapter = new MyListAdapter(new ArrayList<>());
         PostResultMessageLab.getData(getContext(), mAdapter);
         mRecyclerView.setAdapter(mAdapter);
+        handler.post(runnable);
+
+    }
+    private Handler handler = new Handler();
+    private Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            PostResultMessageLab.updateData(getContext(), mAdapter);
+                handler.postDelayed(this,500);
+
+    }
+    };
+    public  void onPause() {
+        super.onPause();
+        Log.d("info", "Pause");
+        handler.removeCallbacks(runnable);
     }
     public void onResume() {
         super.onResume();
-        PostResultMessageLab.getData(getContext(), mAdapter);
+        Log.d("info", "Resume");
+        handler.post(runnable);
     }
 
     public static ListFragment newInstance(String str) {

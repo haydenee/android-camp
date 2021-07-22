@@ -12,7 +12,7 @@ import com.example.tikee.Fragment.ListFragment;
 
 public class MainActivity extends AppCompatActivity {
 
-    private int nowFrag =0;
+    private int nowFrag =-1;
     ImageView im_camera,im_video,im_cate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
                 im_video.setImageResource(R.drawable.ic_video_chosen);
                 im_cate.setImageResource(R.drawable.ic_category);
                 updateFragment(ListFragment.newInstance("a"),1);
-                nowFrag = 1;
             }
         });
 
@@ -50,12 +49,12 @@ public class MainActivity extends AppCompatActivity {
                 im_video.setImageResource(R.drawable.ic_video);
                 im_cate.setImageResource(R.drawable.ic_category_chosen);
                 updateFragment(ListFragment.newInstance("a"),0);
-                nowFrag = 0;
             }
         });
 
         im_video.setImageResource(R.drawable.ic_video);
         im_cate.setImageResource(R.drawable.ic_category_chosen);
+        updateFragment(ListFragment.newInstance("a"),0);
 
     }
 
@@ -64,5 +63,6 @@ public class MainActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.frame, fragment)
                 .commit();
+        nowFrag = fragIndex;
     }
 }

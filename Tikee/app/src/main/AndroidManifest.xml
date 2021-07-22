@@ -18,7 +18,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".VideoFlowActivity"></activity>
+        <activity android:name=".VideoPlay"></activity>
+        <activity android:name=".VideoFlowActivity" />
         <activity android:name=".UploadActivity" />
         <activity android:name=".SplashActivity">
             <intent-filter>
