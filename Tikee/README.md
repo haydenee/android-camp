@@ -4,12 +4,11 @@
 >
 > 我的视频日记
 
-- [ ] 播放界面
+- [x] 播放界面
 
-  - [ ] 上下滑切视频
-  - [ ] 单击暂停播放
+  - [x] 单击暂停播放
 
-- [ ] 视频列表
+- [x] 视频列表
 
 - [x] 视频拍摄 `RecordingActivity`
 
@@ -20,35 +19,10 @@
 - [x] 上传 `UploadActivity`
 
   - [ ] 封面选择
-  - [ ] 视频压缩
   - [x] 文本编辑
   - [x] POST
 
   
-
-  
-
-  
-
-  
-
-
-
-#### Thoughts
-
-fresco
-
-GreenDao
-
-Retrofit(OkHttp)
-
-MediaCodec+MediaMuxer
-
-黑白（灰度）视频社区？
-
-倒放视频社区？
-
-
 
 #### Notes
 
