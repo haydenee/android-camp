@@ -1,5 +1,6 @@
 package com.example.tikee.Fragment;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.example.tikee.PlayVideoActivity;
 import com.example.tikee.R;
 import com.example.tikee.Utils.GetResultMessageCallback;
 import com.example.tikee.Utils.PostResultMessage;
@@ -55,6 +57,8 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.MyViewHold
     public int getItemCount() {
         return data==null?0:data.size();
     }
+
+    public String getUri(int pos) { return data.get(pos).getVideoUrl();}
 
     @Override
     public void setData(List<PostResultMessage> item) {
@@ -106,7 +110,8 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.MyViewHold
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    Intent i= PlayVideoActivity.newIntent(itemView.getContext(),mPosition,data.get(mPosition).getVideoUrl());
+                    itemView.getContext().startActivity(i);
                 }
             });
         }
