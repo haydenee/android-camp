@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.VideoView;
 
 import androidx.annotation.NonNull;
@@ -32,7 +31,7 @@ public class PlayVideoActivity extends AppCompatActivity {
     private VideoView videoView;
 
     private int Pos;
-    private String Url;
+    private String Url,extraData;
 
     private int current;
     private String CURRENT="current";
@@ -56,10 +55,11 @@ public class PlayVideoActivity extends AppCompatActivity {
     };
 
 
-    public static Intent newIntent(Context context, int mPosition, String videoUrl) {
+    public static Intent newIntent(Context context, int mPosition, String videoUrl, String extraValue) {
         Intent i=new Intent(context,PlayVideoActivity.class);
         i.putExtra("position",mPosition);
         i.putExtra("url",videoUrl);
+        i.putExtra("extra",extraValue);
         return i;
     }
 
@@ -72,9 +72,10 @@ public class PlayVideoActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_play_video);
-
+        findViewById(R.id.animation_view).setVisibility(View.VISIBLE);
         Pos=getIntent().getIntExtra("position",0);
         Url=getIntent().getStringExtra("url");
+        extraData=getIntent().getStringExtra("extra");
         Log.d("info",String.valueOf(Pos) + Url);
         mockUrl = Url;
 
@@ -84,7 +85,7 @@ public class PlayVideoActivity extends AppCompatActivity {
 
         }
         textViewStatus = (TextView) findViewById(R.id.textViewStatus);
-        textViewStatus.setText("玩命加载中");
+        textViewStatus.setText(extraData);
 
         textViewTime = (TextView) findViewById(R.id.textViewTime);
 
@@ -110,7 +111,6 @@ public class PlayVideoActivity extends AppCompatActivity {
         videoView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                Toast.makeText(PlayVideoActivity.this, ""+videoView.isPlaying(), Toast.LENGTH_SHORT).show();
                 if (videoView.isPlaying()){
                     videoView.pause();
                 }else {
@@ -123,18 +123,18 @@ public class PlayVideoActivity extends AppCompatActivity {
             @Override
             public void onPrepared(MediaPlayer mp) {
                 textViewTime.setText(time(videoView.getDuration()));
-                textViewStatus.setText("视频加载完毕");
                 beginPlay();
             }
         });
         videoView.setOnCompletionListener(mp -> {
-            Toast.makeText(PlayVideoActivity.this, "播放完成,自动重播", Toast.LENGTH_SHORT).show();
+
             mp.start();
         });
 
     }
     private void beginPlay(){
-        textViewStatus.setText("请您欣赏");
+        findViewById(R.id.animation_view).setVisibility(View.INVISIBLE);
+
         seekBar.setMax(videoView.getDuration());
         if(current>0){
             videoView.seekTo(current);//切到当前的进度

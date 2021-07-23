@@ -16,7 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import com.example.tikee.PostResultMessageLab;
+import com.example.tikee.Utils.PostResultMessageLab;
 import com.example.tikee.R;
 
 import java.util.ArrayList;

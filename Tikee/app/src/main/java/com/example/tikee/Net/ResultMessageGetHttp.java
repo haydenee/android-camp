@@ -1,4 +1,4 @@
-package com.example.tikee;
+package com.example.tikee.Net;
 
 import com.example.tikee.Utils.Constants;
 import com.example.tikee.Utils.PostResultMessage;
@@ -40,17 +40,11 @@ public class ResultMessageGetHttp {
                 in.close();
 
             } else{
-                throw new IOException("没找到欸QAQ");
+                throw new IOException("Error");
             }
 
         } catch (Exception e){
             e.printStackTrace();
-//            runOnUiThread(new Runnable() {
-//                @Override
-//                public void run() {
-//                    Toast.makeText(MainActivity.this,"网络异常"+e.toString(),Toast.LENGTH_SHORT).show();
-//                }
-//            });
 
         }
         if(result!=null&&result.mItems!=null){

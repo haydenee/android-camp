@@ -70,6 +70,7 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.MyViewHold
         public ImageView mThumb;
         private TextView mTitle;
         private TextView mContent;
+        private TextView mName;
         public int mPosition;
 
 
@@ -100,6 +101,7 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.MyViewHold
             }
             mTitle.setText(item.getExtraValue());
             mContent.setText(item.getTime().substring(0,10));
+            mName.setText(item.getUserName());
         }
 
         public MyViewHolder(@NonNull View itemView) {
@@ -107,10 +109,11 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.MyViewHold
             mThumb = itemView.findViewById(R.id.iv_thumb);
             mTitle = itemView.findViewById(R.id.tv_title);
             mContent = itemView.findViewById(R.id.tv_content);
+            mName = itemView.findViewById(R.id.tv_name);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent i= PlayVideoActivity.newIntent(itemView.getContext(),mPosition,data.get(mPosition).getVideoUrl());
+                    Intent i= PlayVideoActivity.newIntent(itemView.getContext(),mPosition,data.get(mPosition).getVideoUrl(),data.get(mPosition).getExtraValue());
                     itemView.getContext().startActivity(i);
                 }
             });
